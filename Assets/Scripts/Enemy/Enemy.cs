@@ -8,51 +8,58 @@ public class Enemy : MonoBehaviour
     [Header("组件")]
     private Rigidbody2D rb;
 
-    private PhysicsCheck physicsCheck;
+    public PhysicsCheck physicsCheck;
     private Animator anim;
     [Header("属性")] 
     public float currentSpeed;
-
+    public float patrolSpeed;
+    public float chaseSpeed;
+    
     public float waitTime;
     private float waitTimeCounter;
     public float faceDir;
     [Header("状态")] 
     public bool isWait;
-    private void Awake()
+
+    [Header("状态机")] 
+    public BaseState currentState;
+    public PatrolState patrolState;
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
+
+    }
+
+    private void OnEnable()
+    {
+        currentState = patrolState;
+        currentState.OnEnter(this);
     }
 
     private void FixedUpdate()
     {
+        faceDir = Mathf.Sign(transform.localScale.x);
+
+        
         if(!isWait)
             Move();
         
+        //状态机
+        currentState.LogicUpdate();
+        //撞墙计时器
         TimeCounter();
     }
 
     private void Move()
     {
-        faceDir = Mathf.Sign(transform.localScale.x);
-        
-        //撞墙等待等操作
-        CheckState();
 
         rb.velocity = new Vector2(currentSpeed * transform.localScale.x * Time.deltaTime,
             rb.velocity.y);
         
     }
-
-    private void CheckState()
-    {
-        if (physicsCheck.headTouchCheck || physicsCheck.isOnEdge)
-        {
-            isWait = true;
-            rb.velocity = Vector2.zero;
-        }
-    }
+    
 
     private void TimeCounter()
     {

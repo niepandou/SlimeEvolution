@@ -3615,7 +3615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738bccde56091034ba31cc09d0e6ee91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 100
+  physicsCheck: {fileID: 0}
+  currentSpeed: 0
+  patrolSpeed: 100
+  chaseSpeed: 0
   waitTime: 2
   faceDir: 0
   isWait: 0
