@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Frame;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     [Header("组件")]
     private PlayerInputControl playerInput;
     private Rigidbody2D rb;
@@ -19,6 +21,15 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     private void Awake()
     {
+        if (!instance )
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
         playerInput = new PlayerInputControl();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
