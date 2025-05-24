@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,22 +15,31 @@ public class Enemy : MonoBehaviour
     public float currentSpeed;
     public float patrolSpeed;
     public float chaseSpeed;
+    public Vector2 foundSize;
+    public float foundDistance;
+    public int playerLayer;
     
+    [Header("计时器")]
     public float waitTime;
-    private float waitTimeCounter;
+    public float waitTimeCounter;
+    public float lostTime;
+    public float lostTimeCounter;
+    
     public float faceDir;
     [Header("状态")] 
     public bool isWait;
-
+    
     [Header("状态机")] 
     public BaseState currentState;
     public PatrolState patrolState;
+    public ChaseState chaseState;
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
 
+        playerLayer = LayerMask.GetMask("Player");
     }
 
     private void OnEnable()
@@ -59,10 +69,16 @@ public class Enemy : MonoBehaviour
             rb.velocity.y);
         
     }
-    
 
+
+    public bool FoundPlayer()
+    {
+        return Physics2D.BoxCast(transform.position, foundSize, 0, new Vector2(faceDir,0), foundDistance, playerLayer);
+    }
+    
     private void TimeCounter()
     {
+        //撞墙等待
         if (isWait)
         {
             waitTimeCounter += Time.deltaTime;
@@ -73,5 +89,29 @@ public class Enemy : MonoBehaviour
                 transform.localScale = new Vector3(-faceDir, 1, 1);
             }
         }
+        //玩家丢失
+        if (!FoundPlayer() && lostTimeCounter < lostTime)
+        {
+            lostTimeCounter += Time.deltaTime;
+        }
+    }
+
+    public void SwitchState(NpcState state)
+    {
+        BaseState newState = state switch
+        {
+            NpcState.Patrol => patrolState,
+            NpcState.Chase => chaseState,
+            _ => null
+        };
+        
+        currentState.OnExit();
+        currentState = newState;
+        newState.OnEnter(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position,transform.position + new Vector3(faceDir * foundDistance,0,0));
     }
 }

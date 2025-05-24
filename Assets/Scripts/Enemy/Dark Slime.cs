@@ -9,5 +9,6 @@ public class DarkSlime : Enemy
         base.Awake();
 
         patrolState = new PatrolState();
+        chaseState = new ChaseState();
     }
 }

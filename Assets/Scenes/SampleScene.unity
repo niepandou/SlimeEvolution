@@ -3618,8 +3618,14 @@ MonoBehaviour:
   physicsCheck: {fileID: 0}
   currentSpeed: 0
   patrolSpeed: 100
-  chaseSpeed: 0
+  chaseSpeed: 150
+  foundSize: {x: 1, y: 1}
+  foundDistance: 4
+  playerLayer: 0
   waitTime: 2
+  waitTimeCounter: 0
+  lostTime: 3
+  lostTimeCounter: 0
   faceDir: 0
   isWait: 0
 --- !u!114 &2125748655
