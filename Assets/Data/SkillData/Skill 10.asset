@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b740883ca6c490b419157cb019ee1a63, type: 3}
+  m_Name: Skill 10
+  m_EditorClassIdentifier: 
+  skillID: 10
+  skillSprite: {fileID: 21300000, guid: 65583459f5e584e9985ec922dee3a3f7, type: 3}
+  skillName: Apple
+  skillLevel: 0
+  skillDes: Apple
+  isUnlocked: 0
+  preSkills:
+  - {fileID: 11400000, guid: 0acdfdfbec7d13b43b91d46f5295fb0e, type: 2}
+  - {fileID: 11400000, guid: 81a0d637fd286024f8c7e4421fd8a1f1, type: 2}
+  - {fileID: 11400000, guid: 1341dda4ffbf20a4a9e75973493a4d51, type: 2}
