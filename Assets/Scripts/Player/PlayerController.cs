@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
+    public GameObject SkillTreeUI;
     [Header("组件")]
     private PlayerInputControl playerInput;
     private Rigidbody2D rb;
@@ -41,6 +42,24 @@ public class PlayerController : MonoBehaviour
         playerInput.Enable();
         playerInput.GamePlay.Jump.started += Jump;
         playerInput.GamePlay.Attack.started += PlayerAttack;
+        
+        //暂停面板
+        playerInput.UI.Pause.started += PausePanel;
+    }
+
+    //TODO:后续需将该方法放到指定的Manager当中
+    private void PausePanel(InputAction.CallbackContext obj)
+    {
+        if (!SkillTreeUI.activeInHierarchy)
+        {
+            SkillTreeUI.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            SkillTreeUI.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 
     private void Update()
@@ -77,7 +96,4 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetTrigger("attack");
     }
-    
-
-    
 }
