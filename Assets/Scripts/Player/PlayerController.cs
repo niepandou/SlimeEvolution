@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float moveDir;
     public float jumpForce;
+    [Header("技能模板")] 
+    public GameObject skill1;
+    public GameObject skill2;
+    public GameObject skill3;
     private void Awake()
     {
         if (!instance )
@@ -42,10 +46,13 @@ public class PlayerController : MonoBehaviour
         playerInput.Enable();
         playerInput.GamePlay.Jump.started += Jump;
         playerInput.GamePlay.Attack.started += PlayerAttack;
-        
+        playerInput.GamePlay.Skill1.started += PlayerSKill1;
+        playerInput.GamePlay.Skill2.started += PlayerSkill2;
         //暂停面板
         playerInput.UI.Pause.started += PausePanel;
     }
+
+    
 
     //TODO:后续需将该方法放到指定的Manager当中
     private void PausePanel(InputAction.CallbackContext obj)
@@ -94,6 +101,19 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAttack(InputAction.CallbackContext callbackContext)
     {
+        Instantiate(skill1,transform);
         anim.SetTrigger("attack");
     }
+    private void PlayerSKill1(InputAction.CallbackContext obj)
+    {
+        GameObject skill = Instantiate(skill2,transform.position,this.transform.rotation);
+        skill.transform.localScale = this.transform.localScale;
+    }
+    private void PlayerSkill2(InputAction.CallbackContext obj)
+    {
+        GameObject skill = Instantiate(skill3,transform.position,this.transform.rotation);
+        skill.transform.localScale = this.transform.localScale;
+
+    }
+
 }

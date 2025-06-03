@@ -51,12 +51,12 @@ TagManager:
   - name: Ground
     uniqueID: 91623551
     locked: 0
+  - name: Attack
+    uniqueID: 2437377769
+    locked: 0
   - name: Background
     uniqueID: 1193548023
     locked: 0
   - name: Front
     uniqueID: 771503201
-    locked: 0
-  - name: Attack
-    uniqueID: 2437377769
     locked: 0
