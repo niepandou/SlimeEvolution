@@ -9,7 +9,6 @@ public class Attack : MonoBehaviour
     public float attackRate;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
         other.GetComponent<Character>()?.GetHurt(this);
     }
 }
