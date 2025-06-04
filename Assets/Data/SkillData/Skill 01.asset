@@ -19,3 +19,5 @@ MonoBehaviour:
   skillDes: FrostSpell
   isUnlocked: 0
   preSkills: []
+  skillGameObject: {fileID: 4683355989496892971, guid: 7884b82f051a2ce40bda1972e0c520d3, type: 3}
+  skillType: 0

@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 //原小火球生成
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager instance;
-
+    public SkillData[] skillSOs;
     public SkillData activeSkill;
     [Header("UI")] 
     public Image skillImage;
@@ -19,7 +20,12 @@ public class SkillManager : MonoBehaviour
     public TextMeshProUGUI pointText;
     
     public SkillButton[] skillButtons;
-
+    [Header("技能装备槽")] 
+    public Image skillEquipLine;
+    public Image skillEquipExplosion;
+    public Image skillEquipCast;
+    
+    
     private void Awake()
     {
         if (instance == null)
@@ -29,6 +35,13 @@ public class SkillManager : MonoBehaviour
         else if(instance != this)
         {
             Destroy(this.gameObject);
+        }
+        
+        //TODO:目前没有存档,每次打开时需要重置技能树
+        foreach (var skill in skillSOs)
+        {
+            skill.skillLevel = 0;
+            skill.isUnlocked = false;
         }
     }
 
@@ -79,6 +92,36 @@ public class SkillManager : MonoBehaviour
             }
         }
         
+    }
+    /// <summary>
+    /// 技能装备
+    /// </summary>
+    public void EquipButton()
+    {
+        if(!activeSkill) return;
+
+        if (activeSkill.isUnlocked)
+        {
+            switch (activeSkill.skillType)
+            {
+                case SkillType.Line:
+                    skillEquipLine.sprite = activeSkill.skillSprite;
+                    skillEquipLine.color = Color.white;
+                    PlayerController.instance.skill1 = activeSkill.skillGameObject;
+                    break;
+                case SkillType.Explosion:
+                    skillEquipExplosion.sprite = activeSkill.skillSprite;
+                    skillEquipExplosion.color = Color.white;
+                    PlayerController.instance.skill2 = activeSkill.skillGameObject;
+                    break;
+                case SkillType.Cast:
+                    skillEquipCast.sprite = activeSkill.skillSprite;
+                    skillEquipCast.color = Color.white;
+                    PlayerController.instance.skill3 = activeSkill.skillGameObject;
+                    break;
+            }
+        }
+       
     }
 
     public void SkillUpdate()

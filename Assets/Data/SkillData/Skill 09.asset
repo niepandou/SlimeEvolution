@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Skill 09
   m_EditorClassIdentifier: 
   skillID: 9
-  skillSprite: {fileID: 21300000, guid: 6f8f7f77b150246b09d197df2580fd8e, type: 3}
-  skillName: WeaponSpell
+  skillSprite: {fileID: 21300000, guid: 43e2d7faf13041145829b828fbd0636d, type: 3}
+  skillName: HolyStar
   skillLevel: 0
-  skillDes: WeaponSpell
+  skillDes: HolyStar
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: d5cfd57fd608d334da49848697a335de, type: 2}
+  skillGameObject: {fileID: 8157290294779715024, guid: af59d92d8350ce74e8f5ee2dcf20eb23, type: 3}
+  skillType: 0

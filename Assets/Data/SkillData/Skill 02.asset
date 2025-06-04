@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillID: 2
   skillSprite: {fileID: 21300000, guid: 99f9f84be286446a1a4ee1889e69bc56, type: 3}
-  skillName: FireSpell
+  skillName: BigFireBall
   skillLevel: 0
-  skillDes: FireSpell
+  skillDes: BigFireBall
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: eb5430f92bbbcc54881192afff175a5a, type: 2}
+  skillGameObject: {fileID: 6128861324174977465, guid: 54c000dadc4d73a41a8917c891dca754, type: 3}
+  skillType: 0

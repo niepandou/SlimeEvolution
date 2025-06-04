@@ -6,4 +6,11 @@
         Chase,
         //Skill
     }
+
+    public enum SkillType
+    {
+        Line,
+        Explosion,
+        Cast
+    }
 }

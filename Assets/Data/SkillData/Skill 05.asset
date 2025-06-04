@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Skill 05
   m_EditorClassIdentifier: 
   skillID: 5
-  skillSprite: {fileID: 21300000, guid: 0c136515f7aa49e43ba0840df48c1f4d, type: 3}
-  skillName: Samural
+  skillSprite: {fileID: 21300000, guid: 61bb6e4dd6eed4afc8e391d23abcbade, type: 3}
+  skillName: Cast
   skillLevel: 0
-  skillDes: Samural
+  skillDes: Cast
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: 7e7c0f5e62df26b46a26c207e06a8788, type: 2}
   - {fileID: 11400000, guid: c4d6ab9cb1658aa49a60c1a49bd673c5, type: 2}
   - {fileID: 11400000, guid: 3ec174085460a474eba014529d2e58d9, type: 2}
+  skillGameObject: {fileID: 1200606222652841927, guid: d0e26938362b15343b030910c3c3ac76, type: 3}
+  skillType: 2

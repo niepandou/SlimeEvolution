@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Skill 10
   m_EditorClassIdentifier: 
   skillID: 10
-  skillSprite: {fileID: 21300000, guid: 65583459f5e584e9985ec922dee3a3f7, type: 3}
-  skillName: Apple
+  skillSprite: {fileID: 21300000, guid: f27a7dcf9eed27b4bb556f19cdf56252, type: 3}
+  skillName: BigStar
   skillLevel: 0
-  skillDes: Apple
+  skillDes: BigStar
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: 0acdfdfbec7d13b43b91d46f5295fb0e, type: 2}
   - {fileID: 11400000, guid: 81a0d637fd286024f8c7e4421fd8a1f1, type: 2}
   - {fileID: 11400000, guid: 1341dda4ffbf20a4a9e75973493a4d51, type: 2}
+  skillGameObject: {fileID: 4991257499313551195, guid: cf50cbc2d47690047848e715f681e6c0, type: 3}
+  skillType: 0

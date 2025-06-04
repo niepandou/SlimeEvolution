@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Skill 06
   m_EditorClassIdentifier: 
   skillID: 6
-  skillSprite: {fileID: 21300000, guid: 39658835b35c67c41b2032d578fe12c1, type: 3}
-  skillName: WizardLighting
+  skillSprite: {fileID: 21300000, guid: 7b676b573b5224964a9ccc1a49a5b5bb, type: 3}
+  skillName: HolyCast
   skillLevel: 0
-  skillDes: WizardLighting
+  skillDes: HolyCast
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: 3ec174085460a474eba014529d2e58d9, type: 2}
+  skillGameObject: {fileID: 8461656774651806210, guid: 6538144371311e041aef643879839993, type: 3}
+  skillType: 2

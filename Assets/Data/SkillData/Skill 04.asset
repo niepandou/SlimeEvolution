@@ -20,3 +20,5 @@ MonoBehaviour:
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: 22e817ba0ed47964f9f16a75e95591f8, type: 2}
+  skillGameObject: {fileID: 7431154130445202080, guid: 4d33be43ad836864796216bbbbab5436, type: 3}
+  skillType: 1

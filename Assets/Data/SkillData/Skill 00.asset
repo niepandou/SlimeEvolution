@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Skill 00
   m_EditorClassIdentifier: 
   skillID: 0
-  skillSprite: {fileID: 21300000, guid: 7140c686292792a4abfe218b90b2ae90, type: 3}
-  skillName: FlameOriginal
+  skillSprite: {fileID: 21300000, guid: 2d93066aba55a9041a83bd9403bd8d5c, type: 3}
+  skillName: FireBall
   skillLevel: 0
-  skillDes: FlameOriginal
+  skillDes: FireBall
   isUnlocked: 0
   preSkills: []
+  skillGameObject: {fileID: 506756297322486855, guid: 8cbcd0838465eaa4eb6a704bd590dd82, type: 3}
+  skillType: 0

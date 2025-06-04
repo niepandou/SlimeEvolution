@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Skill 07
   m_EditorClassIdentifier: 
   skillID: 7
-  skillSprite: {fileID: 21300000, guid: fd6ab744a13821741bae075ba578bce0, type: 3}
-  skillName: SamuralLiseom
+  skillSprite: {fileID: 21300000, guid: bd342816b57b5e84ba38a25226148b7a, type: 3}
+  skillName: Tornado
   skillLevel: 0
-  skillDes: SamuralLiseom
+  skillDes: Tornado
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: de67bf8eaf2d61b4b81456b9fdd0dda3, type: 2}
+  skillGameObject: {fileID: 4981295018419690720, guid: a02145a3d2b091946b303b5ac181b60c, type: 3}
+  skillType: 0

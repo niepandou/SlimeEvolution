@@ -99,21 +99,41 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce,ForceMode2D.Impulse);
     }
 
+    //Line
     private void PlayerAttack(InputAction.CallbackContext callbackContext)
     {
-        Instantiate(skill1,transform);
+        GameObject skill = Instantiate(skill1,transform.position,this.transform.rotation);
+        skill.transform.localScale = this.transform.localScale;
         anim.SetTrigger("attack");
     }
+    //Explosion
     private void PlayerSKill1(InputAction.CallbackContext obj)
     {
-        GameObject skill = Instantiate(skill2,transform.position,this.transform.rotation);
-        skill.transform.localScale = this.transform.localScale;
+        //偏移量
+        float x = -1.5f, y = 1.5f;
+        
+        for (int i = 0; i < 3; ++i)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                Vector3 skillPosition = new Vector3(transform.position.x + x, transform.position.y + y,
+                    transform.position.z);
+                GameObject skill = Instantiate(skill2,skillPosition,this.transform.rotation);
+                skill.transform.localScale = this.transform.localScale;
+                x += 1.5f;
+            }
+
+            x = -1.5f;
+            y -= 1.5f;
+        }
+        
+        anim.SetTrigger("attack");
     }
+    //Cast
     private void PlayerSkill2(InputAction.CallbackContext obj)
     {
-        GameObject skill = Instantiate(skill3,transform.position,this.transform.rotation);
-        skill.transform.localScale = this.transform.localScale;
-
+        Instantiate(skill3, transform);
+        anim.SetTrigger("attack");
     }
 
 }

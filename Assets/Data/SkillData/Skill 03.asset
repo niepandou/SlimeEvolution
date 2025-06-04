@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Skill 03
   m_EditorClassIdentifier: 
   skillID: 3
-  skillSprite: {fileID: 21300000, guid: 8a1680ec09858bc4aa7b4e3ad474dd89, type: 3}
-  skillName: ArcherArrowRain
+  skillSprite: {fileID: 21300000, guid: 7140c686292792a4abfe218b90b2ae90, type: 3}
+  skillName: FireExplosion
   skillLevel: 0
-  skillDes: ArcherArrowRain
+  skillDes: FireExplosion
   isUnlocked: 0
   preSkills:
   - {fileID: 11400000, guid: eb5430f92bbbcc54881192afff175a5a, type: 2}
+  skillGameObject: {fileID: 6436345700518500418, guid: b7afcdb2b843dbc48b47b9173562004b, type: 3}
+  skillType: 1
