@@ -2064,7 +2064,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Tileset Ground_63
+      name: LeftUpCorner
       rect:
         serializedVersion: 2
         x: 416
@@ -3273,7 +3273,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Tileset Ground_120
+      name: RightUpCorner
       rect:
         serializedVersion: 2
         x: 192
@@ -4330,6 +4330,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      LeftUpCorner: -8399431015594367256
+      RightUpCorner: 7149495969167708271
       TX Tileset Ground_10: -8050565165637369036
       TX Tileset Ground_100: -3436862730290116494
       TX Tileset Ground_101: -4074374073859113712
@@ -4353,7 +4355,6 @@ TextureImporter:
       TX Tileset Ground_118: -4449845688393832668
       TX Tileset Ground_119: 1140266542427505824
       TX Tileset Ground_12: -9153956920074294983
-      TX Tileset Ground_120: 7149495969167708271
       TX Tileset Ground_121: -5400040089587543099
       TX Tileset Ground_122: 3448590907577752742
       TX Tileset Ground_123: 8783977218132511519
@@ -4446,7 +4447,6 @@ TextureImporter:
       TX Tileset Ground_60: 2249758793273999391
       TX Tileset Ground_61: 7933787385540080387
       TX Tileset Ground_62: -1788669641975307430
-      TX Tileset Ground_63: -8399431015594367256
       TX Tileset Ground_64: -3205075110183578529
       TX Tileset Ground_65: -8830748653819333967
       TX Tileset Ground_66: 5513663994605884462
