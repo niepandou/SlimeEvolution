@@ -5394,10 +5394,16 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   speed: 200
   moveDir: 0
-  jumpForce: 20
-  skill1: {fileID: 506756297322486855, guid: 8cbcd0838465eaa4eb6a704bd590dd82, type: 3}
-  skill2: {fileID: 6436345700518500418, guid: b7afcdb2b843dbc48b47b9173562004b, type: 3}
-  skill3: {fileID: 1200606222652841927, guid: d0e26938362b15343b030910c3c3ac76, type: 3}
+  jumpForce: 24
+  skill1: {fileID: 0}
+  skill2: {fileID: 0}
+  skill3: {fileID: 0}
+  couldJumpTwice: 1
+  couldSmashDown: 1
+  skill1CD: 0.5
+  skill2CD: 1
+  skill3CD: 5
+  down: 0
 --- !u!95 &1336523287
 Animator:
   serializedVersion: 5
@@ -5444,7 +5450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkRadius: 0.25
-  groundOffset: 0.81
+  checkBox: {x: 2.41, y: 0.36}
+  groundOffset: 0.86
   isGround: 0
   isOnEdge: 0
   backTouchCheck: 0
@@ -11905,6 +11912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkRadius: 0.2
+  checkBox: {x: 0, y: 0}
   groundOffset: 0.86
   isGround: 0
   isOnEdge: 0

@@ -10,8 +10,9 @@ public class PhysicsCheck : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     [Header("属性")] 
-    //地面采用射线检测,墙体采用圆点检测
+    //地面采用盒子检测,墙体采用圆点检测
     public float checkRadius;
+    public Vector2 checkBox;
     private float faceDir;
     private Vector2 backPoint;
     private Vector2 headPoint;
@@ -42,10 +43,8 @@ public class PhysicsCheck : MonoBehaviour
 
     private void Check()
     {
-        isGround = Physics2D.Raycast(transform.position, 
-            Vector2.down, 
-            groundOffset, 
-            groundLayer);
+        isGround = Physics2D.BoxCast(transform.position, checkBox, 0, Vector2.down
+        ,groundOffset,groundLayer);
         //本次项目的所有角色中心点都在图像中心
         //TODO:转向后的潜在问题
         faceDir = transform.localScale.x;
@@ -62,7 +61,7 @@ public class PhysicsCheck : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position,transform.position + Vector3.down * groundOffset);
+        Gizmos.DrawCube(transform.position + Vector3.down * groundOffset,checkBox);
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(backPoint,checkRadius);
         Gizmos.DrawSphere(headPoint,checkRadius);

@@ -19,5 +19,6 @@ public class PlayerAnimationController : MonoBehaviour
     private void Update()
     {
         anim.SetBool("isGround",physicsCheck.isGround);
+        anim.SetBool("down",player.down);
     }
 }

@@ -71,6 +71,15 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SmashDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa401390-dade-49ea-9e29-c37bfcb34988"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,17 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""action"": ""Skill2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0f6ee4a-5e88-4fa5-aa74-971b4bb6f490"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SmashDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -224,6 +244,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         m_GamePlay_Attack = m_GamePlay.FindAction("Attack", throwIfNotFound: true);
         m_GamePlay_Skill1 = m_GamePlay.FindAction("Skill1", throwIfNotFound: true);
         m_GamePlay_Skill2 = m_GamePlay.FindAction("Skill2", throwIfNotFound: true);
+        m_GamePlay_SmashDown = m_GamePlay.FindAction("SmashDown", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -299,6 +320,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Attack;
     private readonly InputAction m_GamePlay_Skill1;
     private readonly InputAction m_GamePlay_Skill2;
+    private readonly InputAction m_GamePlay_SmashDown;
     public struct GamePlayActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -308,6 +330,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_GamePlay_Attack;
         public InputAction @Skill1 => m_Wrapper.m_GamePlay_Skill1;
         public InputAction @Skill2 => m_Wrapper.m_GamePlay_Skill2;
+        public InputAction @SmashDown => m_Wrapper.m_GamePlay_SmashDown;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -332,6 +355,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @Skill2.started += instance.OnSkill2;
             @Skill2.performed += instance.OnSkill2;
             @Skill2.canceled += instance.OnSkill2;
+            @SmashDown.started += instance.OnSmashDown;
+            @SmashDown.performed += instance.OnSmashDown;
+            @SmashDown.canceled += instance.OnSmashDown;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -351,6 +377,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @Skill2.started -= instance.OnSkill2;
             @Skill2.performed -= instance.OnSkill2;
             @Skill2.canceled -= instance.OnSkill2;
+            @SmashDown.started -= instance.OnSmashDown;
+            @SmashDown.performed -= instance.OnSmashDown;
+            @SmashDown.canceled -= instance.OnSmashDown;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -421,6 +450,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnSkill1(InputAction.CallbackContext context);
         void OnSkill2(InputAction.CallbackContext context);
+        void OnSmashDown(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
