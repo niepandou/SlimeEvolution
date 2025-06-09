@@ -8,11 +8,6 @@ public class Attack : MonoBehaviour
     public float damage;
     public float attackRate;
 
-    private void Update()
-    {
-        Debug.Log("test");
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.GetComponent<Character>()?.GetHurt(this);

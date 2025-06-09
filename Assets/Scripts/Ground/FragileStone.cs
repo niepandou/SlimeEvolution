@@ -6,16 +6,12 @@ using DG.Tweening;
 
 public class FragileStone : MonoBehaviour,IBreakable
 {
-    private int attackLayer;
     private bool hasGetHurt;
-    private void Awake()
-    {
-        attackLayer = LayerMask.NameToLayer("Attack");
-    }
+  
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == attackLayer && !hasGetHurt)
+        if (other.CompareTag("PlayerAttack") && !hasGetHurt)
         {
             GetHurt();
             hasGetHurt = true;

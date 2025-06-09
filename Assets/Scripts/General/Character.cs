@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class Character : MonoBehaviour
     public bool wudi;
     public float wudiTimeCounter;
     public float wudiTime;
+    public bool isHurt;
 
+    public UnityEvent<Transform> hurtEvent;
+    
     private void Update()
     {
         WuDiTimeCounter();
@@ -26,8 +30,10 @@ public class Character : MonoBehaviour
     {
         if (!wudi)
         {
+            hurtEvent.Invoke(attacker.transform);
             if (currentHealth - attacker.damage > 0)
             {
+                isHurt = true;
                 currentHealth -= attacker.damage;
                 wudi = true;
             }

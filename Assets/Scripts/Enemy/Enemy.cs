@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 
 public class Enemy : MonoBehaviour
 {
     [Header("组件")]
     private Rigidbody2D rb;
-
+    private Character character;
     public PhysicsCheck physicsCheck;
     private Animator anim;
     [Header("属性")] 
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
     public Vector2 foundSize;
     public float foundDistance;
     public int playerLayer;
+    public float hurtForce;
     
     [Header("计时器")]
     public float waitTime;
@@ -33,9 +35,11 @@ public class Enemy : MonoBehaviour
     public BaseState currentState;
     public PatrolState patrolState;
     public ChaseState chaseState;
+    
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        character = GetComponent<Character>();
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
 
@@ -51,9 +55,8 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         faceDir = Mathf.Sign(transform.localScale.x);
-
         
-        if(!isWait)
+        if(!isWait && !character.isHurt)
             Move();
         
         //状态机
@@ -64,13 +67,26 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-
+        
         rb.velocity = new Vector2(currentSpeed * transform.localScale.x * Time.deltaTime,
             rb.velocity.y);
-        
     }
 
 
+    public void GetHurt(Transform attacker)
+    {
+        if (attacker.transform.position.x < transform.position.x)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        
+        anim.SetTrigger("hurt");
+        rb.AddForce(new Vector2(-faceDir,0.3f) * hurtForce,ForceMode2D.Impulse);
+    }
     public bool FoundPlayer()
     {
         return Physics2D.BoxCast(transform.position, foundSize, 0, new Vector2(faceDir,0), foundDistance, playerLayer);

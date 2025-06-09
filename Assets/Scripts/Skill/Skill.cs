@@ -29,7 +29,7 @@ public abstract class Skill : MonoBehaviour
             transform.position.z);
     }
     //技能生命周期
-    IEnumerator SkillLifeStart()
+    protected IEnumerator SkillLifeStart()
     {
         yield return new WaitForSeconds(skillLifeTime);
         

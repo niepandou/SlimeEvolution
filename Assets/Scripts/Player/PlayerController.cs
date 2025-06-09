@@ -117,11 +117,13 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce,ForceMode2D.Impulse);
             jumpCounter = 1;
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxJump);
         }else if (jumpCounter == 1 && couldJumpTwice)
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce,ForceMode2D.Impulse);
             jumpCounter = 2;
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxJump);
         }
     }
     /// <summary>
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!physicsCheck.isGround && couldSmashDown)
         {
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.down);
             down = true;
             rb.AddForce(Vector2.down * jumpForce,ForceMode2D.Impulse);
         }
@@ -144,8 +147,10 @@ public class PlayerController : MonoBehaviour
 
         if (!skill1Frozen)
         {
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxShoot);
             StartCoroutine(SkillCounter(skill1CD,(value)=>skill1Frozen = value));
             GameObject skill = Instantiate(skill1,transform.position,this.transform.rotation);
+            skill.tag = "PlayerAttack";
             skill.transform.localScale = this.transform.localScale;
             anim.SetTrigger("attack");
         }
@@ -157,6 +162,7 @@ public class PlayerController : MonoBehaviour
         if (!skill2) return;
         if (!skill2Frozen)
         {
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxExplosion);
             StartCoroutine(SkillCounter(skill2CD,(value)=>skill2Frozen = value));
             //偏移量
             float x = -1.5f, y = 1.5f;
@@ -168,6 +174,12 @@ public class PlayerController : MonoBehaviour
                     Vector3 skillPosition = new Vector3(transform.position.x + x, transform.position.y + y,
                         transform.position.z);
                     GameObject skill = Instantiate(skill2,skillPosition,this.transform.rotation);
+                    skill.tag = "PlayerAttack";
+                    for (int k = 0; k < 3; ++k)
+                    {
+                        skill.transform.GetChild(k).gameObject.tag = "PlayerAttack";
+                    }
+                    
                     skill.transform.localScale = this.transform.localScale;
                     x += 1.5f;
                 }
@@ -186,8 +198,10 @@ public class PlayerController : MonoBehaviour
         
         if (!skill3Frozen)
         {
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxCast);
             StartCoroutine(SkillCounter(skill3CD,(value)=>skill3Frozen = value));
-            Instantiate(skill3, transform);
+            GameObject skill = Instantiate(skill3, transform);
+            skill.tag = "PlayerAttack";
             anim.SetTrigger("attack");
         }
         

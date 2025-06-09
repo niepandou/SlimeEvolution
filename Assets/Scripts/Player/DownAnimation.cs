@@ -24,8 +24,13 @@ public class DownAnimation : StateMachineBehaviour
         float x = -1.5f;
         for (int i = 0; i < 3; ++i)
         {
-            Instantiate(ExplosionGameObject, PlayerController.instance.transform.position + new Vector3(x, -1, 0),
+            GameObject skill = Instantiate(ExplosionGameObject, PlayerController.instance.transform.position + new Vector3(x, -1, 0),
                 PlayerController.instance.transform.rotation);
+            skill.tag = "PlayerAttack";
+            for (int k = 0; k < 3; ++k)
+            {
+                skill.transform.GetChild(k).gameObject.tag = "PlayerAttack";
+            }
             x += 1.5f;
         }
     }
