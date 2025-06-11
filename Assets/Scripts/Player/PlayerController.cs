@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float skill3CD;
     [Header("状态")]
     public bool down;
+
+    public bool isDead;
     private void Awake()
     {
         if (!instance )
@@ -66,23 +68,6 @@ public class PlayerController : MonoBehaviour
         playerInput.GamePlay.Skill1.started += PlayerSKill1;
         playerInput.GamePlay.Skill2.started += PlayerSkill2;
         playerInput.GamePlay.SmashDown.started += PlayerSmashDown;
-        //暂停面板
-        playerInput.UI.Pause.started += PausePanel;
-    }
-    
-    //TODO:后续需将该方法放到指定的Manager当中
-    private void PausePanel(InputAction.CallbackContext obj)
-    {
-        if (!SkillTreeUI.activeInHierarchy)
-        {
-            SkillTreeUI.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else
-        {
-            SkillTreeUI.SetActive(false);
-            Time.timeScale = 1;
-        }
     }
 
     private void Update()
@@ -94,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!down && !character.isHurt)
+        if(!down && !character.isHurt && !isDead)
             Move();
     }
 
@@ -113,6 +98,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext callbackContext)
     {
+        if (isDead) return;
+        
         if (physicsCheck.isGround)
         {
             rb.velocity = Vector2.zero;
@@ -144,7 +131,7 @@ public class PlayerController : MonoBehaviour
     //Line
     private void PlayerAttack(InputAction.CallbackContext callbackContext)
     {
-        if (!skill1) return;
+        if (!skill1 || isDead) return;
 
         if (!skill1Frozen)
         {
@@ -160,7 +147,7 @@ public class PlayerController : MonoBehaviour
     //Explosion
     private void PlayerSKill1(InputAction.CallbackContext obj)
     {
-        if (!skill2) return;
+        if (!skill2 || isDead) return;
         if (!skill2Frozen)
         {
             AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxExplosion);
@@ -195,7 +182,7 @@ public class PlayerController : MonoBehaviour
     //Cast
     private void PlayerSkill2(InputAction.CallbackContext obj)
     {
-        if (!skill3) return;
+        if (!skill3 || isDead) return;
         
         if (!skill3Frozen)
         {
@@ -230,7 +217,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnDie()
     {
-        //TODO:玩家死亡动画,打开死亡UI,点击重开重新加载游戏
+        isDead = true;
+    }
+
+    public void Dead()
+    {
         SceneManager.LoadScene(0);
     }
 }
