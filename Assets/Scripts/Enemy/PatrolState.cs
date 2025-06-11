@@ -16,7 +16,7 @@ public class PatrolState : BaseState
         //发现玩家
         if (currentEnemy.FoundPlayer())
         {
-            currentEnemy.SwitchState(NpcState.Chase);
+            currentEnemy.SwitchState(NpcState.Attack);
         }
         //巡逻逻辑
         

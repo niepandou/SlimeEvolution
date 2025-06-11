@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Frame;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
@@ -15,11 +16,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private PhysicsCheck physicsCheck;
+    private Character character;
     [Header("属性")] 
     [SerializeField] private Vector2 moveInput;
     public float speed;
     public float moveDir;
     public float jumpForce;
+    public float hurtForce;
     [Header("技能模板")] 
     public GameObject skill1;
     public GameObject skill2;
@@ -52,6 +55,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
+        character = GetComponent<Character>();
     }
 
     private void OnEnable()
@@ -65,10 +69,7 @@ public class PlayerController : MonoBehaviour
         //暂停面板
         playerInput.UI.Pause.started += PausePanel;
     }
-
-   
-
-
+    
     //TODO:后续需将该方法放到指定的Manager当中
     private void PausePanel(InputAction.CallbackContext obj)
     {
@@ -93,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!down)
+        if(!down && !character.isHurt)
             Move();
     }
 
@@ -218,5 +219,18 @@ public class PlayerController : MonoBehaviour
         setFrozen(true);
         yield return new WaitForSeconds(time);
         setFrozen(false);
+    }
+
+    public void GetHurt(Transform attacker)
+    {
+        anim.SetTrigger("hurt");
+        rb.velocity = Vector2.zero;
+        rb.AddForce(new Vector2(attacker.localScale.x * 0.1f,1f) * hurtForce,ForceMode2D.Impulse);
+    }
+
+    public void OnDie()
+    {
+        //TODO:玩家死亡动画,打开死亡UI,点击重开重新加载游戏
+        SceneManager.LoadScene(0);
     }
 }

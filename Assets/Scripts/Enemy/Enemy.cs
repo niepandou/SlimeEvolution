@@ -11,15 +11,20 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Character character;
     public PhysicsCheck physicsCheck;
-    private Animator anim;
+    public Animator anim;
     [Header("属性")] 
     public float currentSpeed;
     public float patrolSpeed;
-    public float chaseSpeed;
+    public float attackSpeed;
+    public float foundSpeed;
     public Vector2 foundSize;
     public float foundDistance;
     public int playerLayer;
     public float hurtForce;
+    [Header("技能")]
+    public GameObject skill;
+    public float skillFrozenTime;
+    public bool skillFrozen;
     
     [Header("计时器")]
     public float waitTime;
@@ -32,9 +37,10 @@ public class Enemy : MonoBehaviour
     public bool isWait;
     
     [Header("状态机")] 
-    public BaseState currentState;
-    public PatrolState patrolState;
-    public ChaseState chaseState;
+    protected BaseState currentState;
+    protected PatrolState patrolState;
+    protected AttackState attackState;
+    protected FoundState foundState;
     
     protected virtual void Awake()
     {
@@ -85,7 +91,19 @@ public class Enemy : MonoBehaviour
         }
         
         anim.SetTrigger("hurt");
+        rb.velocity = Vector2.zero;
         rb.AddForce(new Vector2(-faceDir,0.3f) * hurtForce,ForceMode2D.Impulse);
+    }
+
+    public void OnDie()
+    {
+        //TODO:敌人死亡动画,进入死亡状态,结束销毁
+        Die();
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
     public bool FoundPlayer()
     {
@@ -117,7 +135,8 @@ public class Enemy : MonoBehaviour
         BaseState newState = state switch
         {
             NpcState.Patrol => patrolState,
-            NpcState.Chase => chaseState,
+            NpcState.Attack => attackState,
+            NpcState.Found => foundState,
             _ => null
         };
         
@@ -126,8 +145,33 @@ public class Enemy : MonoBehaviour
         newState.OnEnter(this);
     }
 
-    private void OnDrawGizmos()
+    public void UseSkill()
     {
-        Gizmos.DrawLine(transform.position,transform.position + new Vector3(faceDir * foundDistance,0,0));
+        if (!skillFrozen)
+        {
+            StartCoroutine(SkillCounter(skillFrozenTime,(value)=>skillFrozen = value));
+            skillRelease();
+        }
+    }
+
+    protected virtual void skillRelease()
+    {
+        GameObject currentSkill = Instantiate(skill,transform.position,transform.rotation);
+        currentSkill.transform.localScale = transform.localScale;
+        currentSkill.tag = "EnemyAttack";
+    }
+
+
+    IEnumerator SkillCounter(float time,Action<bool> setFrozen)
+    {
+        setFrozen(true);
+        yield return new WaitForSeconds(time);
+        setFrozen(false);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + Vector3.right * (foundSize.x + foundDistance) * faceDir/2, 
+            foundSize + new Vector2(foundDistance,0));
     }
 }

@@ -3,8 +3,8 @@
     public enum NpcState
     {
         Patrol,
-        Chase,
-        //Skill
+        Attack,
+        Found
     }
 
     public enum SkillType

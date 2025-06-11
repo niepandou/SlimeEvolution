@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     public bool isHurt;
 
     public UnityEvent<Transform> hurtEvent;
-    
+    public UnityEvent onDieEvent;
     private void Update()
     {
         WuDiTimeCounter();
@@ -40,11 +40,8 @@ public class Character : MonoBehaviour
             else
             {
                 currentHealth = 0;
-                //TODO:死亡
+                onDieEvent.Invoke();
             }
-            
-            //TODO:受伤反馈
-
         }
     }
 
