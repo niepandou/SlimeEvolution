@@ -224,4 +224,12 @@ public class PlayerController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
 }
