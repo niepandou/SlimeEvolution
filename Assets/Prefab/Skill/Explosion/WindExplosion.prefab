@@ -214,9 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cba2f87f289dd40a92984bef4ce30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
-  startDamage: 30
-  attackRate: 0
+  attackData: {fileID: 11400000, guid: fe8879fff00825440a1b152e55d3e13e, type: 2}
 --- !u!1 &6850384620904997676
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,9 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cba2f87f289dd40a92984bef4ce30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  startDamage: 20
-  attackRate: 0
+  attackData: {fileID: 11400000, guid: 54a80fd7df14e634592dce642af117e7, type: 2}
 --- !u!1 &8546887289556971793
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +396,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cba2f87f289dd40a92984bef4ce30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  startDamage: 20
-  attackRate: 0
+  attackData: {fileID: 11400000, guid: 08b738f290f86964c9ad2136440d288c, type: 2}

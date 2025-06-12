@@ -2286,6 +2286,22 @@ MonoBehaviour:
   - {fileID: 1637154067}
   - {fileID: 1037266974}
   - {fileID: 866865338}
+  attackDatas:
+  - {fileID: 11400000, guid: a13375f78d3e1ff44a3092be059b66f1, type: 2}
+  - {fileID: 11400000, guid: 52ba57c4a19f4e7479200f8dd6b8c934, type: 2}
+  - {fileID: 11400000, guid: 3a2d43ff5533c334a8171cc1cbb8b1df, type: 2}
+  - {fileID: 11400000, guid: 9f6bb0eaf76942b4c9293210aafb078a, type: 2}
+  - {fileID: 11400000, guid: 9db78c00ef9f12545bac225230002479, type: 2}
+  - {fileID: 11400000, guid: 38227b2006768244ca1e2045daf1fd89, type: 2}
+  - {fileID: 11400000, guid: 08b738f290f86964c9ad2136440d288c, type: 2}
+  - {fileID: 11400000, guid: fe8879fff00825440a1b152e55d3e13e, type: 2}
+  - {fileID: 11400000, guid: 54a80fd7df14e634592dce642af117e7, type: 2}
+  - {fileID: 11400000, guid: f3d3c9547826f7044bd9d9fa5ea2cc52, type: 2}
+  - {fileID: 11400000, guid: 3b708a3990ee8d742a78144c093fd551, type: 2}
+  - {fileID: 11400000, guid: 42a6e5bbccd521e40ba3dbdd0fd55dd7, type: 2}
+  - {fileID: 11400000, guid: 31d4552583cc91b468d21a47537abac3, type: 2}
+  - {fileID: 11400000, guid: e3e465bc7451fb647a8d0bf66cf6a3b0, type: 2}
+  - {fileID: 11400000, guid: a4930e7147c9cd84ca8fc52a602df96a, type: 2}
   skillEquipLine: {fileID: 926925089}
   skillEquipExplosion: {fileID: 16281476}
   skillEquipCast: {fileID: 558835351}

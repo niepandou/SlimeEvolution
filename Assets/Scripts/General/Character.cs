@@ -30,12 +30,13 @@ public class Character : MonoBehaviour
     {
         if (!wudi)
         {
-            hurtEvent.Invoke(attacker.transform);
-            if (currentHealth - attacker.damage > 0)
+            float damage = this.CompareTag("Enemy")?attacker.attackData.playerDamage:attacker.attackData.enemyDamage;
+            if (currentHealth -damage > 0)
             {
                 isHurt = true;
-                currentHealth -= attacker.damage;
+                currentHealth -= damage;
                 wudi = true;
+                hurtEvent.Invoke(attacker.transform);
             }
             else
             {

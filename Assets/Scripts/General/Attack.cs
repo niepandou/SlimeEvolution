@@ -2,22 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Attack : MonoBehaviour
 {
-    public float damage;
-    public float startDamage;
-    public float attackRate;
+    public AttackData attackData;
 
-    private void Awake()
-    {
-        damage = startDamage;
-    }
+    
 
-    public float GetDamage()
-    {
-        return damage;
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ((this.CompareTag("PlayerAttack") && other.gameObject.CompareTag("Enemy"))

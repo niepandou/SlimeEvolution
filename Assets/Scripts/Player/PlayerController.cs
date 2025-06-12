@@ -239,11 +239,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        if (instance == this)
-        {
-            instance = null;
-        }
-    }
+    
 }

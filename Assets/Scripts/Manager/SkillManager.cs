@@ -20,6 +20,7 @@ public class SkillManager : MonoBehaviour
     public TextMeshProUGUI pointText;
     
     public SkillButton[] skillButtons;
+    public AttackData[] attackDatas;
     [Header("技能装备槽")] 
     public Image skillEquipLine;
     public Image skillEquipExplosion;
@@ -37,11 +38,17 @@ public class SkillManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         
-        //TODO:目前没有存档,每次打开时需要重置技能树
+        //目前没有存档,每次打开时需要重置技能树
         foreach (var skill in skillSOs)
         {
             skill.skillLevel = 0;
             skill.isUnlocked = false;
+        }
+
+        foreach (var attackData in attackDatas)
+        {
+            attackData.playerDamage = attackData.startDamage;
+            attackData.enemyDamage = attackData.startDamage;
         }
     }
 
@@ -63,14 +70,14 @@ public class SkillManager : MonoBehaviour
         switch (activeSkill.skillType)
         {
             case SkillType.Line:
-                skillDes.text += "\nSkill Damage:" +activeSkill.skillGameObject.GetComponent<Attack>().damage;
+                skillDes.text += "\nSkill Damage:" +activeSkill.skillGameObject.GetComponent<Attack>().attackData.playerDamage;
                 break;
             case SkillType.Explosion:
                 for (int i = 0; i < 3; ++i)
                 {
                     skillDes.text += "\nSkill Damager" + i + ": "
                                                         + activeSkill.skillGameObject.transform.GetChild(i)
-                                                            .GetComponent<Attack>().damage;
+                                                            .GetComponent<Attack>().attackData.playerDamage;
                 }
                 break;
             case SkillType.Cast:
@@ -149,12 +156,12 @@ public class SkillManager : MonoBehaviour
             switch (activeSkill.skillType)
             {
                 case SkillType.Line:
-                    activeSkill.skillGameObject.GetComponent<Attack>().damage += 3;
+                    activeSkill.skillGameObject.GetComponent<Attack>().attackData.playerDamage += 3;
                     break;
                 case SkillType.Explosion:
                     for (int i = 0; i < 3; ++i)
                     {
-                        activeSkill.skillGameObject.transform.GetChild(i).GetComponent<Attack>().damage += 3;
+                        activeSkill.skillGameObject.transform.GetChild(i).GetComponent<Attack>().attackData.playerDamage += 3;
                     }
                     break;
                 //TODO:防御系技能免伤增加
