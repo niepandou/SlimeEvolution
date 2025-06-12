@@ -34,9 +34,18 @@ public class AudioManager : MonoBehaviour
         fxSource.clip = clip;
         fxSource.Play();
     }
+    
     public void PlayBgmSound(AudioClip audioClip)
     {
         bgmSource.clip = audioClip;
         bgmSource.Play();        
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
     }
 }

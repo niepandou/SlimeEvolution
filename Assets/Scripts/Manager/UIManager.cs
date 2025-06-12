@@ -21,15 +21,17 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        playerInput = new PlayerInputControl();
-        
-        //暂停面板
+        playerInput = PlayerController.instance.playerInput;
     }
 
     private void OnEnable()
     {
         playerInput.UI.Pause.started += ShowSkillUI;
+    }
+
+    private void OnDisable()
+    {
+        playerInput.UI.Pause.started -= ShowSkillUI;
     }
 
     private void ShowSkillUI(InputAction.CallbackContext obj)
@@ -48,6 +50,7 @@ public class UIManager : MonoBehaviour
 
     public void ReStartGame()
     {
+        // Destroy(PlayerController.instance.gameObject);
         SceneManager.LoadSceneAsync(0);
         Time.timeScale = 1;
     }
@@ -64,5 +67,13 @@ public class UIManager : MonoBehaviour
         skillUI.SetActive(false);
         deadUI.SetActive(false);
     }
-    
+
+
+    private void OnDestroy()
+    {
+        if (this == instance)
+        {
+            instance = null;
+        }
+    }
 }

@@ -1014,7 +1014,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.887
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6199,8 +6199,8 @@ MonoBehaviour:
   skill3: {fileID: 0}
   couldJumpTwice: 1
   couldSmashDown: 1
-  skill1CD: 0.5
-  skill2CD: 1
+  skill1CD: 1
+  skill2CD: 2
   skill3CD: 5
   down: 0
   isDead: 0
@@ -6269,7 +6269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 2000
   wudi: 0
   wudiTimeCounter: 0
   wudiTime: 0.5
@@ -12486,7 +12486,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.499
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -14476,7 +14476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1867164158
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14867,6 +14867,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2125748648}
+  - {fileID: 1947734521}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1890319611
@@ -15096,6 +15097,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936760168}
   m_CullTransparentMesh: 1
+--- !u!1001 &1947734520
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1885797325}
+    m_Modifications:
+    - target: {fileID: 2497729758928624333, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_Name
+      value: Stone Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+--- !u!4 &1947734521 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2653467847398095616, guid: f156b82ceb96ce049ad030481c9cd8ab, type: 3}
+  m_PrefabInstance: {fileID: 1947734520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1951942753
 GameObject:
   m_ObjectHideFlags: 0
@@ -15876,6 +15939,10 @@ PrefabInstance:
     - target: {fileID: 6145787919284120530, guid: 55675404fb651f14cb33fe611fc7c19e, type: 3}
       propertyPath: onDieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670412957493837509, guid: 55675404fb651f14cb33fe611fc7c19e, type: 3}
+      propertyPath: skillFrozenTime
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7640017285311627457, guid: 55675404fb651f14cb33fe611fc7c19e, type: 3}
       propertyPath: m_LocalPosition.x

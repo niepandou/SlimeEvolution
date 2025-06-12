@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 60
+  startDamage: 60
   attackRate: 0
 --- !u!61 &8049307449167745569
 BoxCollider2D:

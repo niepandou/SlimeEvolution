@@ -6,13 +6,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-
+[DefaultExecutionOrder(-1)]
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
     public GameObject SkillTreeUI;
     [Header("组件")]
-    private PlayerInputControl playerInput;
+    public PlayerInputControl playerInput;
     private Rigidbody2D rb;
     private Animator anim;
     private PhysicsCheck physicsCheck;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
     private void Awake()
     {
-        if (!instance )
+        if (!instance)
         {
             instance = this;
         }
@@ -68,6 +68,16 @@ public class PlayerController : MonoBehaviour
         playerInput.GamePlay.Skill1.started += PlayerSKill1;
         playerInput.GamePlay.Skill2.started += PlayerSkill2;
         playerInput.GamePlay.SmashDown.started += PlayerSmashDown;
+    }
+
+    private void OnDisable()
+    {
+        playerInput.Disable();
+        playerInput.GamePlay.Jump.started -= Jump;
+        playerInput.GamePlay.Attack.started -= PlayerAttack;
+        playerInput.GamePlay.Skill1.started -= PlayerSKill1;
+        playerInput.GamePlay.Skill2.started -= PlayerSkill2;
+        playerInput.GamePlay.SmashDown.started -= PlayerSmashDown;
     }
 
     private void Update()
@@ -105,13 +115,13 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce,ForceMode2D.Impulse);
             jumpCounter = 1;
-            // AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxJump);
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxJump);
         }else if (jumpCounter == 1 && couldJumpTwice)
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce,ForceMode2D.Impulse);
             jumpCounter = 2;
-            // AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxJump);
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxJump);
         }
     }
     /// <summary>
@@ -122,7 +132,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!physicsCheck.isGround && couldSmashDown)
         {
-            // AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.down);
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.down);
             down = true;
             rb.AddForce(Vector2.down * jumpForce,ForceMode2D.Impulse);
         }
@@ -135,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
         if (!skill1Frozen)
         {
-            // AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxShoot);
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxShoot);
             StartCoroutine(SkillCounter(skill1CD,(value)=>skill1Frozen = value));
             GameObject skill = Instantiate(skill1,transform.position,this.transform.rotation);
             skill.tag = "PlayerAttack";
@@ -150,7 +160,7 @@ public class PlayerController : MonoBehaviour
         if (!skill2 || isDead) return;
         if (!skill2Frozen)
         {
-            // AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxExplosion);
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxExplosion);
             StartCoroutine(SkillCounter(skill2CD,(value)=>skill2Frozen = value));
             //偏移量
             float x = -1.5f, y = 1.5f;
@@ -186,7 +196,7 @@ public class PlayerController : MonoBehaviour
         
         if (!skill3Frozen)
         {
-            // AudioManager.instance.PlayFxSounnd(AudioManager.instance.audioData.sfxCast);
+            AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxCast);
             StartCoroutine(SkillCounter(skill3CD,(value)=>skill3Frozen = value));
             GameObject skill = Instantiate(skill3, transform);
             skill.tag = "PlayerAttack";
@@ -218,11 +228,15 @@ public class PlayerController : MonoBehaviour
     public void OnDie()
     {
         isDead = true;
+        UIManager.instance.ShowDeadUI();
     }
 
-    public void Dead()
+    public void OnDestroy()
     {
-        SceneManager.LoadScene(0);
+        if (instance == this)
+        {
+            instance = null;
+        }
     }
 
     private void OnDestroy()

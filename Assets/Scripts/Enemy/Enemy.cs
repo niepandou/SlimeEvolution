@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using Utils;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(PhysicsCheck))]
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(Character), typeof(BoxCollider2D))]
 public class Enemy : MonoBehaviour
 {
     [Header("组件")]
@@ -35,7 +37,7 @@ public class Enemy : MonoBehaviour
     public float faceDir;
     [Header("状态")] 
     public bool isWait;
-    
+    public bool isDead;
     [Header("状态机")] 
     protected BaseState currentState;
     protected PatrolState patrolState;
@@ -62,7 +64,7 @@ public class Enemy : MonoBehaviour
     {
         faceDir = Mathf.Sign(transform.localScale.x);
         
-        if(!isWait && !character.isHurt)
+        if(!isWait && !character.isHurt && !isDead)
             Move();
         
         //状态机
@@ -73,7 +75,6 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        
         rb.velocity = new Vector2(currentSpeed * transform.localScale.x * Time.deltaTime,
             rb.velocity.y);
     }
@@ -98,7 +99,8 @@ public class Enemy : MonoBehaviour
     public void OnDie()
     {
         //TODO:敌人死亡动画,进入死亡状态,结束销毁
-        Die();
+        anim.SetBool("dead", true);
+        isDead = true;
     }
 
     public void Die()
@@ -147,7 +149,7 @@ public class Enemy : MonoBehaviour
 
     public void UseSkill()
     {
-        if (!skillFrozen)
+        if (!skillFrozen && !isDead)
         {
             StartCoroutine(SkillCounter(skillFrozenTime,(value)=>skillFrozen = value));
             skillRelease();

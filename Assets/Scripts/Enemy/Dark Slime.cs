@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DarkSlime : Enemy
+public class NormalSlime : Enemy
 {
     protected override void Awake()
     {

@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  startDamage: 20
   attackRate: 0
 --- !u!1 &7431154130445202080
 GameObject:
@@ -307,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  startDamage: 20
   attackRate: 0
 --- !u!1 &8577436942909036486
 GameObject:
@@ -399,4 +401,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
+  startDamage: 30
   attackRate: 0

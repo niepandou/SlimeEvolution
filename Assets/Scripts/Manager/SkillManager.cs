@@ -59,11 +59,29 @@ public class SkillManager : MonoBehaviour
         skillName.text = "SkillName: " + activeSkill.skillName;
         skillLevel.text = "SkillLevel: " + activeSkill.skillLevel;
         skillDes.text = "Description:\n" + activeSkill.skillDes;
+
+        switch (activeSkill.skillType)
+        {
+            case SkillType.Line:
+                skillDes.text += "\nSkill Damage:" +activeSkill.skillGameObject.GetComponent<Attack>().damage;
+                break;
+            case SkillType.Explosion:
+                for (int i = 0; i < 3; ++i)
+                {
+                    skillDes.text += "\nSkill Damager" + i + ": "
+                                                        + activeSkill.skillGameObject.transform.GetChild(i)
+                                                            .GetComponent<Attack>().damage;
+                }
+                break;
+            case SkillType.Cast:
+                skillDes.text += "\nDefend 80% Damage";
+                break;
+        }
     }
 
     public void UpdateSkillPoint()
     {
-        pointText.text = "Points: " + skillPoint + "/20";
+        pointText.text = "Points: " + skillPoint + "/100";
     }
     /// <summary>
     /// 技能升级
@@ -126,6 +144,22 @@ public class SkillManager : MonoBehaviour
 
     public void SkillUpdate()
     {
+        if (activeSkill.isUnlocked)
+        {
+            switch (activeSkill.skillType)
+            {
+                case SkillType.Line:
+                    activeSkill.skillGameObject.GetComponent<Attack>().damage += 3;
+                    break;
+                case SkillType.Explosion:
+                    for (int i = 0; i < 3; ++i)
+                    {
+                        activeSkill.skillGameObject.transform.GetChild(i).GetComponent<Attack>().damage += 3;
+                    }
+                    break;
+                //TODO:防御系技能免伤增加
+            }
+        }
         //LeftPanel
         //无前置条件可以直接激活或升级
         skillButtons[activeSkill.skillID].GetComponent<Image>().color = Color.white;
@@ -142,5 +176,13 @@ public class SkillManager : MonoBehaviour
         DisplaySkillInfo();
 
         activeSkill.isUnlocked = true;
+    }
+
+    private void OnDestroy()
+    {
+        if (this == instance)
+        {
+            instance = null;
+        }
     }
 }

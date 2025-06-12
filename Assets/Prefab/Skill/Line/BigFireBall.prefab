@@ -181,4 +181,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  startDamage: 20
   attackRate: 0
