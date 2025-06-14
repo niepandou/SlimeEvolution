@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private PhysicsCheck physicsCheck;
-    private Character character;
+    public Character character;
     [Header("属性")] 
     [SerializeField] private Vector2 moveInput;
     public float speed;

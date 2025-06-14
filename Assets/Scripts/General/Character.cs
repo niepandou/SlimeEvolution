@@ -16,6 +16,9 @@ public class Character : MonoBehaviour
 
     public UnityEvent<Transform> hurtEvent;
     public UnityEvent onDieEvent;
+    [Header("信号传递")]
+    public CharacterEventSO onHealthChange;
+    public VoidEventSo getHurtEvent;
     private void Update()
     {
         WuDiTimeCounter();
@@ -31,17 +34,24 @@ public class Character : MonoBehaviour
         if (!wudi)
         {
             float damage = this.CompareTag("Enemy")?attacker.attackData.playerDamage:attacker.attackData.enemyDamage;
-            if (currentHealth -damage > 0)
+            if (attacker.CompareTag("Attack")) damage = attacker.attackData.enemyDamage;
+            if (currentHealth - damage > 0)
             {
                 isHurt = true;
                 currentHealth -= damage;
                 wudi = true;
                 hurtEvent.Invoke(attacker.transform);
+                getHurtEvent.RaiseEvent();
             }
             else
             {
                 currentHealth = 0;
                 onDieEvent.Invoke();
+            }
+
+            if (this.CompareTag("Player"))
+            {
+                onHealthChange?.OnRaisedEvent(this);
             }
         }
     }

@@ -9,7 +9,7 @@ public class AttackState : BaseState
     {
         currentEnemy = enemy;
         currentEnemy.isWait = false;
-        currentEnemy.waitTimeCounter  = 0;
+        currentEnemy.waitTimeCounter = 0;
         currentEnemy.lostTimeCounter = 0;
         currentEnemy.anim.SetTrigger("founded");
         currentEnemy.currentSpeed = currentEnemy.attackSpeed;

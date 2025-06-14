@@ -13,7 +13,8 @@ public class Attack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ((this.CompareTag("PlayerAttack") && other.gameObject.CompareTag("Enemy"))
-            || (this.CompareTag("EnemyAttack") && other.gameObject.CompareTag("Player")))
+            || (this.CompareTag("EnemyAttack") && other.gameObject.CompareTag("Player"))
+            || this.CompareTag("Attack"))
         {
             other.GetComponent<Character>()?.GetHurt(this);
         }

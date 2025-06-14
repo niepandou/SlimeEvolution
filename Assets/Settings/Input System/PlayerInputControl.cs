@@ -80,6 +80,15 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""131ceca5-b3d1-4694-905f-f52cff74ce4c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -203,6 +212,17 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""action"": ""SmashDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fc6f238-b7b4-43cb-ad8b-7419b2924480"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -245,6 +265,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         m_GamePlay_Skill1 = m_GamePlay.FindAction("Skill1", throwIfNotFound: true);
         m_GamePlay_Skill2 = m_GamePlay.FindAction("Skill2", throwIfNotFound: true);
         m_GamePlay_SmashDown = m_GamePlay.FindAction("SmashDown", throwIfNotFound: true);
+        m_GamePlay_Confirm = m_GamePlay.FindAction("Confirm", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -321,6 +342,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Skill1;
     private readonly InputAction m_GamePlay_Skill2;
     private readonly InputAction m_GamePlay_SmashDown;
+    private readonly InputAction m_GamePlay_Confirm;
     public struct GamePlayActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -331,6 +353,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         public InputAction @Skill1 => m_Wrapper.m_GamePlay_Skill1;
         public InputAction @Skill2 => m_Wrapper.m_GamePlay_Skill2;
         public InputAction @SmashDown => m_Wrapper.m_GamePlay_SmashDown;
+        public InputAction @Confirm => m_Wrapper.m_GamePlay_Confirm;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -358,6 +381,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @SmashDown.started += instance.OnSmashDown;
             @SmashDown.performed += instance.OnSmashDown;
             @SmashDown.canceled += instance.OnSmashDown;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -380,6 +406,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @SmashDown.started -= instance.OnSmashDown;
             @SmashDown.performed -= instance.OnSmashDown;
             @SmashDown.canceled -= instance.OnSmashDown;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -451,6 +480,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         void OnSkill1(InputAction.CallbackContext context);
         void OnSkill2(InputAction.CallbackContext context);
         void OnSmashDown(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

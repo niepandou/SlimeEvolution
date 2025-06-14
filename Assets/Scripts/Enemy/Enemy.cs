@@ -10,8 +10,8 @@ using Utils;
 public class Enemy : MonoBehaviour
 {
     [Header("组件")]
-    private Rigidbody2D rb;
-    private Character character;
+    protected Rigidbody2D rb;
+    protected Character character;
     public PhysicsCheck physicsCheck;
     public Animator anim;
     [Header("属性")] 
@@ -40,9 +40,9 @@ public class Enemy : MonoBehaviour
     public bool isDead;
     [Header("状态机")] 
     protected BaseState currentState;
-    protected PatrolState patrolState;
-    protected AttackState attackState;
-    protected FoundState foundState;
+    protected BaseState patrolState;
+    protected BaseState attackState;
+    protected BaseState foundState;
     
     protected virtual void Awake()
     {
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         currentState.OnEnter(this);
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         faceDir = Mathf.Sign(transform.localScale.x);
         
@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         TimeCounter();
     }
 
-    private void Move()
+    protected void Move()
     {
         rb.velocity = new Vector2(currentSpeed * transform.localScale.x * Time.deltaTime,
             rb.velocity.y);
@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
         isDead = true;
     }
 
-    public void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }
@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
         return Physics2D.BoxCast(transform.position, foundSize, 0, new Vector2(faceDir,0), foundDistance, playerLayer);
     }
     
-    private void TimeCounter()
+    protected void TimeCounter()
     {
         //撞墙等待
         if (isWait)

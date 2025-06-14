@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SpecialChest
+  m_Controller: {fileID: 9100000, guid: fbf4617c8adc692428528becdd5e84fb, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b51bd23c50ac4dd4f8652c77d37a6b50, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1f5c96c89f47eb34ab3b7c23ffd4a4b0, type: 2}

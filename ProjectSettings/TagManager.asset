@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - PlayerAttack
   - EnemyAttack
+  - Attack
+  - Interactable
   layers:
   - Default
   - TransparentFX
