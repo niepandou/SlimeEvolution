@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("attack");
         }
     }
-    //Cast
+    //Cast,护盾
     private void PlayerSkill2(InputAction.CallbackContext obj)
     {
         if (!skill3 || isDead) return;
@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
         {
             AudioManager.instance.PlayFxSound(AudioManager.instance.audioData.sfxCast);
             StartCoroutine(SkillCounter(skill3CD,(value)=>skill3Frozen = value));
-            GameObject skill = Instantiate(skill3, transform);
+            GameObject skill = Instantiate(skill3, transform);//父子关系,必须是此关系,否则无法获知给谁免伤
             skill.tag = "PlayerAttack";
             anim.SetTrigger("attack");
         }

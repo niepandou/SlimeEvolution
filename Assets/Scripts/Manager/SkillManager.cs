@@ -21,6 +21,7 @@ public class SkillManager : MonoBehaviour
     
     public SkillButton[] skillButtons;
     public AttackData[] attackDatas;
+    public CastSkillData[] CastSkillDatas;
     [Header("技能装备槽")] 
     public Image skillEquipLine;
     public Image skillEquipExplosion;
@@ -49,6 +50,12 @@ public class SkillManager : MonoBehaviour
         {
             attackData.playerDamage = attackData.startDamage;
             attackData.enemyDamage = attackData.startDamage;
+        }
+
+        foreach (var castSkillData in CastSkillDatas)
+        {
+            castSkillData.playerDamagePercent = castSkillData.startDamagePercent;
+            castSkillData.enemyDamagePercent = castSkillData.startDamagePercent;
         }
     }
 
@@ -81,7 +88,9 @@ public class SkillManager : MonoBehaviour
                 }
                 break;
             case SkillType.Cast:
-                skillDes.text += "\nDefend 80% Damage";
+                skillDes.text += "\nDamage Defend:" 
+                                 + activeSkill.skillGameObject.GetComponent<CastSkill>().castSkillData.playerDamagePercent
+                                 +"%";
                 break;
         }
     }
@@ -164,7 +173,12 @@ public class SkillManager : MonoBehaviour
                         activeSkill.skillGameObject.transform.GetChild(i).GetComponent<Attack>().attackData.playerDamage += 3;
                     }
                     break;
-                //TODO:防御系技能免伤增加
+                case SkillType.Cast:
+                    if (activeSkill.skillGameObject.GetComponent<CastSkill>().castSkillData.playerDamagePercent < 90)
+                    {
+                        activeSkill.skillGameObject.GetComponent<CastSkill>().castSkillData.playerDamagePercent += 5;
+                    }
+                    break;
             }
         }
         //LeftPanel

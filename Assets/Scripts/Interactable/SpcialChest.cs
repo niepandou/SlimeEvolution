@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,7 +18,6 @@ public class SpcialChest : Chest
         PlayerController.instance.couldJumpTwice = true;
         GameObject currentGameObject = Instantiate(skillDes,transform.position + Vector3.up * 1f,Quaternion.identity);
         currentGameObject.GetComponent<TextMeshPro>().text = "Get Jump Twice Now!!!";
-        wallDes.SetActive(true);
     }
 
     public void GetSlamSkill()
@@ -28,6 +25,10 @@ public class SpcialChest : Chest
         PlayerController.instance.couldSmashDown = true;
         GameObject currentGameObject = Instantiate(skillDes,transform.position + Vector3.up * 1f,Quaternion.identity);
         currentGameObject.GetComponent<TextMeshPro>().text = "Get Ground Slam Now!!!";
+    }
+
+    public void DisplayText()
+    {
         wallDes.SetActive(true);
     }
 }

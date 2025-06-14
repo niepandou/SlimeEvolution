@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
 {
     public float currentHealth;
     public float maxHealth;
+    public float hurtPercent;//减伤比例
     public bool wudi;
     public float wudiTimeCounter;
     public float wudiTime;
@@ -35,6 +36,8 @@ public class Character : MonoBehaviour
         {
             float damage = this.CompareTag("Enemy")?attacker.attackData.playerDamage:attacker.attackData.enemyDamage;
             if (attacker.CompareTag("Attack")) damage = attacker.attackData.enemyDamage;
+            
+            damage = damage*(1-this.hurtPercent/100);
             if (currentHealth - damage > 0)
             {
                 isHurt = true;

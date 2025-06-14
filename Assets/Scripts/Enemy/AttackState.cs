@@ -23,7 +23,7 @@ public class AttackState : BaseState
             currentEnemy.SwitchState(NpcState.Found);
         }
     }
-
+    
     public override void PhysicsUpdate()
     {
         
